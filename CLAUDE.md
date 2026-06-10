@@ -17,6 +17,15 @@ Public collection of self-collected, self-evolved Claude Code skills for code an
 - Cold binaries (PDFs, audio, exports): `.apsolut/07-files/` — `000-template.md` is a manifest; read it to find the one file a task needs, never scan the folder
 - Hot images: `.apsolut/08-screenshots/` — manifest + intent subfolders `inspiration/` (keep) and `bugs/` (ephemeral)
 
+## Guardrails (public repo)
+
+This repo is **public**. Everything committed is visible to the world.
+
+- **Never commit sensitive data** — no API keys, tokens, passwords, private URLs, client names, emails, machine paths with usernames, or anything from `.apsolut/`. When writing skill examples, use obvious placeholders (`YOUR_API_KEY`, `example.com`).
+- **Only skill content belongs in the repo.** Allowed formats: `.md` (skills: `<category>/<skill-name>/SKILL.md` + supporting markdown, standalone `.md` when genuinely needed), plus `.css` and `.html` when a skill ships them (e.g. drop-in theme tokens, HTML templates). The only other exceptions are repo meta files: `LICENSE` and `.gitignore`. No scripts, binaries, configs, images, or data files — those live in the private vault.
+- **The pre-commit hook enforces this** (`.git/hooks/pre-commit`): it rejects staged files outside the allowed formats, anything under `.apsolut/`, and content matching common secret patterns. It is a local backstop, not permission to be careless — and it doesn't survive a fresh clone, so re-create it if missing.
+- Before committing, scan the diff yourself for secrets and non-markdown files; don't rely on the hook alone. Never use `git add -f` to bypass `.gitignore`, and never weaken the hook to get a commit through.
+
 ## Commands
 
 ```bash

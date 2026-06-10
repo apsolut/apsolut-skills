@@ -1,0 +1,136 @@
+/*
+ * Ghibli design system — design tokens (Tailwind v4 CSS-first)
+ *
+ * Cornflower blue + slate, with teal/coral/gold accents. Muted, film-inspired
+ * tones — no saturated colors. Originated in apsolut v1, ported to the
+ * Supastarter/shadcn variable scheme in v2.
+ *
+ * Usage: import this file in your Tailwind v4 entry CSS (before @import "tailwindcss"
+ * utilities resolve), or paste the blocks into your existing theme file.
+ * Works as-is with shadcn/ui components (uses the standard shadcn variable names).
+ */
+
+@layer base {
+	:root {
+		--border: #e2e8f0;
+		--input: #e2e8f0;
+		--ring: #3a6ea5;
+		--background: #f0f5f9;
+		--foreground: #1e293b;
+		--sidebar: #f8fafc;
+		--sidebar-foreground: #1e293b;
+		--primary: #3a6ea5;
+		--primary-foreground: #ffffff;
+		--secondary: #e8f0f8;
+		--secondary-foreground: #2d5a8a;
+		--destructive: #ef4444;
+		--destructive-foreground: #ffffff;
+		--success: #22c55e;
+		--success-foreground: #ffffff;
+		--muted: #f1f5f9;
+		--muted-foreground: #64748b;
+		--accent: #e8f0f8;
+		--accent-foreground: #2d5a8a;
+		--popover: #ffffff;
+		--popover-foreground: #1e293b;
+		--card: #ffffff;
+		--card-foreground: #1e293b;
+		--radius: 0.75rem;
+
+		/* Named accent tokens — utility classes (bg-teal, bg-coral, bg-gold). */
+		--brand: #3a6ea5;
+		--brand-hover: #2d5a8a;
+		--brand-light: #e8f0f8;
+		--brand-muted: #6b9bc3;
+		--teal: #7bb3a8;
+		--teal-light: #e6f3f1;
+		--coral: #e08e6d;
+		--coral-light: #fdf0eb;
+		--gold: #f9c270;
+		--gold-light: #fef7e8;
+	}
+
+	.dark {
+		/* Deep slate base with the same cornflower-blue accent so the brand reads
+		   consistently in dark mode. Hues stay constant; lightness shifts. */
+		--border: #1e293b;
+		--input: #1e293b;
+		--ring: #6b9bc3;
+		--background: #0f172a;
+		--foreground: #f1f5f9;
+		--sidebar: #172033;
+		--sidebar-foreground: #f1f5f9;
+		--primary: #6b9bc3;
+		--primary-foreground: #0f172a;
+		--secondary: #1e293b;
+		--secondary-foreground: #f1f5f9;
+		--destructive: #f87171;
+		--destructive-foreground: #ffffff;
+		--success: #4ade80;
+		--success-foreground: #052e16;
+		--muted: #1e293b;
+		--muted-foreground: #94a3b8;
+		--accent: #1e293b;
+		--accent-foreground: #f1f5f9;
+		--popover: #0f172a;
+		--popover-foreground: #f1f5f9;
+		--card: #1e293b;
+		--card-foreground: #f1f5f9;
+
+		--brand: #6b9bc3;
+		--brand-hover: #8eb6d3;
+		--brand-light: #1e3a5f;
+		--brand-muted: #475569;
+		--teal: #7bb3a8;
+		--teal-light: #1f3b36;
+		--coral: #e08e6d;
+		--coral-light: #3b251e;
+		--gold: #f9c270;
+		--gold-light: #3b2f17;
+	}
+}
+
+@theme {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-success: var(--success);
+	--color-success-foreground: var(--success-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+
+	--color-brand: var(--brand);
+	--color-brand-hover: var(--brand-hover);
+	--color-brand-light: var(--brand-light);
+	--color-brand-muted: var(--brand-muted);
+	--color-teal: var(--teal);
+	--color-teal-light: var(--teal-light);
+	--color-coral: var(--coral);
+	--color-coral-light: var(--coral-light);
+	--color-gold: var(--gold);
+	--color-gold-light: var(--gold-light);
+
+	--radius-sm: calc(var(--radius) * 0.6);
+	--radius-md: calc(var(--radius) * 0.8);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) * 1.4);
+	--radius-2xl: calc(var(--radius) * 1.8);
+	--radius-3xl: calc(var(--radius) * 2.2);
+	--radius-4xl: calc(var(--radius) * 2.6);
+}

@@ -1,6 +1,21 @@
 # apsolut: private project vault — public repo, vault stays local
 .apsolut/
 
+# Secrets — never commit, public repo
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*credentials*
+*secrets*
+*.secret
+id_rsa*
+id_ed25519*
+*.kdbx
+
 # OS noise
 Thumbs.db
 .DS_Store
