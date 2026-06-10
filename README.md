@@ -1,21 +1,48 @@
 # apsolut-skills
 
-Various, self collected, self evolved skills for code, design — for [Claude Code](https://claude.com/claude-code).
+Various, self collected, self evolved skills for code, design.
+
+Every skill follows the [Agent Skills](https://agentskills.io) open standard — a folder with a `SKILL.md` (YAML frontmatter + markdown instructions) — so they work in [Claude Code](https://code.claude.com/docs/en/skills), claude.ai, the Claude Agent SDK, and any other tool that adopts the standard.
+
+## Skills
+
+| Skill | What it does |
+|-------|--------------|
+| [`project-bootstrap`](project-bootstrap/) | Set up a new AI project workspace (Claude Project, custom GPT, Gem, repo instructions) that reproduces quality across sessions — judge first, then instructions, then files |
+| [`project-steward`](project-steward/) | Maintain an existing project workspace: turn corrections into rules, prune rule rot, diagnose and fix output drift |
+
+## Install
+
+**Claude Code** — copy a skill folder into:
+
+| Scope | Path | Invoke |
+|-------|------|--------|
+| Personal (all projects) | `~/.claude/skills/<skill-name>/` | `/<skill-name>` |
+| Project | `.claude/skills/<skill-name>/` | `/<skill-name>` |
+
+```bash
+git clone https://github.com/apsolut/apsolut-skills.git
+cp -r apsolut-skills/project-bootstrap ~/.claude/skills/
+```
+
+**claude.ai** — zip a skill folder, rename to `<skill-name>.skill`, upload under Settings → Capabilities → Skills.
+
+**Other tools** — any agent supporting the [Agent Skills standard](https://agentskills.io) reads the same `SKILL.md`; check your tool's docs for its skills directory.
 
 ## Layout
 
-Each skill lives in its own folder:
-
 ```
 <skill-name>/
-├── SKILL.md          # trigger, instructions, workflow
+├── SKILL.md          # frontmatter (name, description) + instructions
 └── references/       # templates, manifests, supporting docs (optional)
 ```
 
-## Usage
-
-Copy a skill folder into `~/.claude/skills/` (global) or `.claude/skills/` (per project), then invoke it as `/<skill-name>` in Claude Code.
+Frontmatter stays on standard fields (`name`, `description`, `license`, `metadata`) so nothing breaks outside Claude Code.
 
 ## Related
 
 - [apsolut-seshat](https://github.com/apsolut/apsolut-seshat) — project vault scaffolding (`.apsolut/`) these skills pair with
+
+## License
+
+[MIT](LICENSE)
