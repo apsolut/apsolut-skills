@@ -6,10 +6,16 @@ Every skill follows the [Agent Skills](https://agentskills.io) open standard —
 
 ## Skills
 
+Skills are grouped by category. Install the leaf skill folder, not the category — the folder name is the `/command` you type.
+
+### meta — working with AI itself
+
 | Skill | What it does |
 |-------|--------------|
-| [`apsolut-judge-init`](apsolut-judge-init/) | Set up a new AI project workspace (Claude Project, custom GPT, Gem, repo instructions) that reproduces quality across sessions — judge first, then instructions, then files |
-| [`apsolut-judge-care`](apsolut-judge-care/) | Maintain an existing project workspace: turn corrections into rules, prune rule rot, diagnose and fix output drift |
+| [`apsolut-judge-init`](meta/apsolut-judge-init/) | Initialize an AI project workspace (Claude Project, custom GPT, Gem, repo instructions) judge-first, so it reproduces quality across sessions |
+| [`apsolut-judge-care`](meta/apsolut-judge-care/) | Maintain an existing project workspace: turn corrections into rules, prune rule rot, diagnose and fix output drift |
+
+More categories land as skills do — planned: `coding/`, `design/`, `images/`. Skills can also target a specific reference or project, e.g. `design/stripe-design/` for a design skill modeled on stripe.com — prefix the skill name with its subject so the `/command` stays self-explanatory.
 
 ## Install
 
@@ -22,7 +28,7 @@ Every skill follows the [Agent Skills](https://agentskills.io) open standard —
 
 ```bash
 git clone https://github.com/apsolut/apsolut-skills.git
-cp -r apsolut-skills/apsolut-judge-init ~/.claude/skills/
+cp -r apsolut-skills/meta/apsolut-judge-init ~/.claude/skills/
 ```
 
 **claude.ai** — zip a skill folder, rename to `<skill-name>.skill`, upload under Settings → Capabilities → Skills.
@@ -32,9 +38,10 @@ cp -r apsolut-skills/apsolut-judge-init ~/.claude/skills/
 ## Layout
 
 ```
-<skill-name>/
-├── SKILL.md          # frontmatter (name, description) + instructions
-└── references/       # templates, manifests, supporting docs (optional)
+<category>/                  # meta, coding, design, images, ...
+└── <skill-name>/            # what you copy into your skills directory
+    ├── SKILL.md             # frontmatter (name, description) + instructions
+    └── references/          # templates, manifests, supporting docs (optional)
 ```
 
 Frontmatter stays on standard fields (`name`, `description`, `license`, `metadata`) so nothing breaks outside Claude Code.
