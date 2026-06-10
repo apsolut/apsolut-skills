@@ -1,15 +1,15 @@
 ---
 name: apsolut-judge-care
-description: Maintain, evolve, and de-drift an existing AI project workspace (Claude Project, custom GPT, Gemini Gem, or per-repo instructions) — its instructions, files, exemplars, and backlog — so quality compounds instead of rotting. Use this skill whenever the user works inside an established project and wants to update instructions, add or prune project files, says the outputs "feel off", "feel samey", "got worse", wants to add a rule after correcting a draft, finishes/publishes a deliverable, asks for a project review or cleanup, or mentions that the project has been running for a while. Trigger it proactively after a deliverable ships or whenever the user corrects the same thing twice.
+description: Maintain, evolve, and de-drift an existing AI project workspace (Claude Project, custom GPT, Gemini Gem, or per-repo instructions) — its judge checklist, instructions, files, exemplars, and backlog — so quality compounds instead of rotting. Drop-in for projects that already exist, whether or not they were created with apsolut-judge-init. Use this skill whenever the user works inside an established project and wants to update instructions, add or prune project files, says the outputs "feel off", "feel samey", "got worse", wants to add a rule after correcting a draft, finishes/publishes a deliverable, asks for a project review or cleanup, or mentions that the project has been running for a while. Trigger it proactively after a deliverable ships or whenever the user corrects the same thing twice.
 license: MIT
 metadata:
   author: apsolut
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
-# Project Steward
+# Apsolut Judge Care
 
-Keep an existing project workspace sharp over time. Works for any system that pairs persistent instructions with attached files: Claude Projects, custom GPTs, Gemini Gems, or a repo's agent instructions (CLAUDE.md, AGENTS.md). A project is a living system: without maintenance it fails in one of two ways, silent drift (outputs converge to a safe template that technically passes every check) or rule rot (instructions accumulate until none are followed). This skill is the feedback loop that prevents both.
+Keep an existing project workspace sharp over time, with the judge as the centerpiece of maintenance. Works for any system that pairs persistent instructions with attached files: Claude Projects, custom GPTs, Gemini Gems, or a repo's agent instructions (CLAUDE.md, AGENTS.md). A project is a living system: without care it fails in one of two ways, silent drift (outputs converge to a safe template that technically passes every check) or rule rot (instructions accumulate until none are followed). This skill is the feedback loop that prevents both. If the project has no judge checklist yet, the first care operation is to retrofit one (see apsolut-judge-init step 2).
 
 ## The one rule
 
@@ -58,13 +58,13 @@ Maintain a short changelog at the bottom of the instructions document: date plus
 
 ## Boundaries
 
-- Never edit instructions, files, or the judge without showing the proposed change and getting approval. The steward proposes, the user gates.
+- Never edit instructions, files, or the judge without showing the proposed change and getting approval. The skill proposes, the user gates.
 - Preserve the user's hard preferences verbatim through every edit.
 - Prefer the smallest edit that fixes the issue. A review that rewrites everything destroys the calibration the project has accumulated.
 
 ## Quality bar for this skill itself
 
-Before finishing any stewardship pass, verify:
+Before finishing any care pass, verify:
 
 - [ ] Every correction from the session was either converted to a proposed rule or consciously discarded
 - [ ] Anything added is paired with a prune candidate or an explicit "nothing to prune" statement

@@ -1,15 +1,15 @@
 ---
 name: apsolut-judge-init
-description: Set up a new AI project workspace (Claude Project, custom GPT, Gemini Gem, or per-repo instructions) for any recurring kind of work (writing, content, coding, analysis, client deliverables) so it produces consistently high-quality output across sessions. Use this skill whenever the user wants to create a new project workspace, says "make a project for X", "master instructions for X", "set up a workspace for X", asks how to make the assistant write or build something "this good in the future", or wants to turn a successful one-off result into a repeatable system. Use it even if the user only vaguely gestures at wanting repeatability.
+description: Initialize a new AI project workspace (Claude Project, custom GPT, Gemini Gem, or per-repo instructions) judge-first, for any recurring kind of work (writing, content, coding, analysis, client deliverables), so it produces consistently high-quality output across sessions. Use this skill whenever the user wants to create a new project workspace, says "make a project for X", "master instructions for X", "set up a workspace for X", asks how to make the assistant write or build something "this good in the future", or wants to turn a successful one-off result into a repeatable system. Use it even if the user only vaguely gestures at wanting repeatability.
 license: MIT
 metadata:
   author: apsolut
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
-# Project Bootstrap
+# Apsolut Judge Init
 
-Turn a kind of work into a project workspace that reproduces quality across sessions. Works for any system that pairs persistent instructions with attached files: Claude Projects, custom GPTs, Gemini Gems, or a repo's agent instructions (CLAUDE.md, AGENTS.md). The core insight: a project is not a folder of instructions, it is a judge plus a maker plus an evolution plan. Most projects fail because they only build the maker.
+Turn a kind of work into a project workspace that reproduces quality across sessions, built judge-first. Works for any system that pairs persistent instructions with attached files: Claude Projects, custom GPTs, Gemini Gems, or a repo's agent instructions (CLAUDE.md, AGENTS.md). The core insight: a project is not a folder of instructions, it is a judge plus a maker plus an evolution plan. Most projects fail because they only build the maker. This skill builds the judge first and everything else around it.
 
 ## The one rule
 
@@ -67,7 +67,7 @@ Offer, do not auto-produce, extras like backlog seeding or asset inventories. As
 
 ## Quality bar for this skill itself
 
-Before delivering a bootstrap, verify:
+Before delivering an initialized project, verify:
 
 - [ ] The judge section exists and was derived before the style rules
 - [ ] At least half the style rules are concrete bans or measurable targets, not adjectives
