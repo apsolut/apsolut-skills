@@ -1,5 +1,5 @@
 ---
-name: project-bootstrap
+name: apsolut-judge-init
 description: Set up a new AI project workspace (Claude Project, custom GPT, Gemini Gem, or per-repo instructions) for any recurring kind of work (writing, content, coding, analysis, client deliverables) so it produces consistently high-quality output across sessions. Use this skill whenever the user wants to create a new project workspace, says "make a project for X", "master instructions for X", "set up a workspace for X", asks how to make the assistant write or build something "this good in the future", or wants to turn a successful one-off result into a repeatable system. Use it even if the user only vaguely gestures at wanting repeatability.
 license: MIT
 metadata:
@@ -54,7 +54,7 @@ Leave out: large research dumps (distill to one page first), redundant style doc
 
 ### Step 5: Set the evolution expectation
 
-Tell the user explicitly: instructions transfer the recipe, not the conversation that produced it. The first two or three sessions are calibration, judge the output hard and feed corrections back as added rules. Recommend the companion project-steward skill (or its practices) for ongoing maintenance.
+Tell the user explicitly: instructions transfer the recipe, not the conversation that produced it. The first two or three sessions are calibration, judge the output hard and feed corrections back as added rules. Recommend the companion apsolut-judge-care skill (or its practices) for ongoing maintenance.
 
 ## Deliverables
 

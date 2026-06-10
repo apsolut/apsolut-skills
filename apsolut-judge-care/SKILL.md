@@ -1,5 +1,5 @@
 ---
-name: project-steward
+name: apsolut-judge-care
 description: Maintain, evolve, and de-drift an existing AI project workspace (Claude Project, custom GPT, Gemini Gem, or per-repo instructions) — its instructions, files, exemplars, and backlog — so quality compounds instead of rotting. Use this skill whenever the user works inside an established project and wants to update instructions, add or prune project files, says the outputs "feel off", "feel samey", "got worse", wants to add a rule after correcting a draft, finishes/publishes a deliverable, asks for a project review or cleanup, or mentions that the project has been running for a while. Trigger it proactively after a deliverable ships or whenever the user corrects the same thing twice.
 license: MIT
 metadata:

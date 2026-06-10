@@ -8,8 +8,8 @@ Every skill follows the [Agent Skills](https://agentskills.io) open standard —
 
 | Skill | What it does |
 |-------|--------------|
-| [`project-bootstrap`](project-bootstrap/) | Set up a new AI project workspace (Claude Project, custom GPT, Gem, repo instructions) that reproduces quality across sessions — judge first, then instructions, then files |
-| [`project-steward`](project-steward/) | Maintain an existing project workspace: turn corrections into rules, prune rule rot, diagnose and fix output drift |
+| [`apsolut-judge-init`](apsolut-judge-init/) | Set up a new AI project workspace (Claude Project, custom GPT, Gem, repo instructions) that reproduces quality across sessions — judge first, then instructions, then files |
+| [`apsolut-judge-care`](apsolut-judge-care/) | Maintain an existing project workspace: turn corrections into rules, prune rule rot, diagnose and fix output drift |
 
 ## Install
 
@@ -22,7 +22,7 @@ Every skill follows the [Agent Skills](https://agentskills.io) open standard —
 
 ```bash
 git clone https://github.com/apsolut/apsolut-skills.git
-cp -r apsolut-skills/project-bootstrap ~/.claude/skills/
+cp -r apsolut-skills/apsolut-judge-init ~/.claude/skills/
 ```
 
 **claude.ai** — zip a skill folder, rename to `<skill-name>.skill`, upload under Settings → Capabilities → Skills.
