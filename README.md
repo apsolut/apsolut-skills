@@ -23,6 +23,14 @@ Skills are grouped by category. Install the leaf skill folder, not the category 
 | [`design-dna`](design/design-dna/) | Extract a complete design system from a folder of 10–20 screenshots — colors, master font, spacing, components — and package it as a `<brand>-design` skill with Tailwind v4 tokens |
 | [`ghibli-design`](design/ghibli-design/) | Apply the Ghibli design system (cornflower blue + slate with teal/coral/gold accents) — drop-in Tailwind v4 + shadcn tokens, dark mode, component recipes |
 
+### css — effects & visual techniques
+
+Reusable CSS techniques packaged with the judgment that makes them safe: browser-support tiers, fallbacks, accessibility rules, and when-not-to-use.
+
+| Skill | What it does |
+|-------|--------------|
+| [`liquid-glass`](css/liquid-glass/) | Apple-style refractive glass surface — SVG displacement + chromatic aberration on Chromium, frosted fallback elsewhere, solid tier for reduced transparency; base material + part recipes (button, card, more later) |
+
 ### reports — report & briefing templates
 
 Named `<style>-<purpose>-<audience>` so the `/command` says what you get. All share one anatomy and one anti-slop content judge; the style skin differs.

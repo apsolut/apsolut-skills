@@ -1,0 +1,92 @@
+/*
+ * liquid-glass — refractive glass surface with tiered fallbacks
+ *
+ * Baseline (.liquid-glass): frosted glass — works in every backdrop-filter browser.
+ * Enhanced (.liquid-glass--refract): SVG displacement refraction — Chromium only,
+ *   requires the #liquid-glass-filter SVG defs in the DOM (see liquid-glass.html)
+ *   and should be added via the feature detect, not hardcoded.
+ * Reduced transparency / no backdrop-filter: solid tier, same geometry.
+ *
+ * Glass is a surface for short labels and controls, not for body text.
+ */
+
+.liquid-glass {
+  --glass-frost: 0.1;        /* backdrop darkening 0-1; raise for text contrast */
+  --glass-saturation: 1.2;
+  --glass-blur: 12px;        /* frosted-tier blur */
+  --glass-radius: 9999px;    /* pill by default; override per component */
+
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--glass-radius);
+  background: hsl(0 0% 0% / var(--glass-frost));
+  box-shadow:
+    inset 0 0 2px 1px rgb(255 255 255 / 0.35),
+    inset 0 0 10px 4px rgb(255 255 255 / 0.15),
+    inset 0 4px 16px rgb(17 17 26 / 0.05),
+    inset 0 8px 24px rgb(17 17 26 / 0.05),
+    inset 0 6px 56px rgb(17 17 26 / 0.05);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+}
+
+/* Refractive tier — added by the feature detect (Chromium). The url() filter
+   REPLACES the blur, so this class must never ship without the detect. */
+.liquid-glass--refract {
+  -webkit-backdrop-filter: url(#liquid-glass-filter) saturate(var(--glass-saturation));
+  backdrop-filter: url(#liquid-glass-filter) saturate(var(--glass-saturation));
+}
+
+/* Solid tier: no backdrop-filter support — an opaque surface beats a see-through box */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .liquid-glass {
+    background: rgb(28 28 32 / 0.92);
+  }
+}
+
+/* Accessibility: honor reduced transparency with the solid tier */
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-glass,
+  .liquid-glass--refract {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgb(28 28 32 / 0.95);
+  }
+}
+
+/* ---- recipes: parts built on the base surface. More land over time —
+        add new recipes here, never fork the base class. ---- */
+
+/* Button / pill — interactive glass: pointer-events stay ON */
+.liquid-glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  padding: .9rem 1.8rem;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: transform .15s ease, background-color .2s ease;
+}
+.liquid-glass-btn:hover { background: hsl(0 0% 100% / 0.12); }
+.liquid-glass-btn:active { transform: scale(0.97); }
+.liquid-glass-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* Card — carries text, so frost rises and radius softens */
+.liquid-glass-card {
+  --glass-frost: 0.25;
+  --glass-radius: 1.25rem;
+  padding: 1.5rem;
+}
+
+/* The SVG defs block is functional markup, not content — keep it out of layout */
+.liquid-glass-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
