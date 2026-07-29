@@ -1,0 +1,343 @@
+<!doctype html>
+<!-- apsolut-report template. Copy, rename, replace {{...}}, delete unused sections.
+     Anatomy + content rules: reference.md §5-6. Reports with real data are private —
+     never commit a filled report to a public repo. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{Project}} — {{report claim}} · {{date}}</title>
+<!-- Webfonts are progressive enhancement; stacks below survive offline / strict CSP.
+     For a fully self-contained file, delete these three lines. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;800&family=IBM+Plex+Sans:wght@200;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Gruvbox dark — warm terminal instrument panel */
+    --bg:#1d2021; --surface:#282828; --surface2:#32302f; --surface3:#3c3836;
+    --text:#ebdbb2; --dim:#a89984; --faint:#7c6f64; --border:#3c3836;
+    --gold:#fabd2f; --green:#b8bb26; --red:#fb4934; --blue:#83a598; --orange:#fe8019; --pink:#d3869b;
+    --aqua:#8ec07c; --gray:#928374;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --sans:'IBM Plex Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:var(--sans);font-weight:400;line-height:1.6; /* body 400; thin 200 is display-only */
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% -5%,rgba(250,189,47,.10),transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 20%,rgba(131,165,152,.08),transparent 60%),
+      radial-gradient(ellipse 80% 40% at 50% 110%,rgba(254,128,25,.06),transparent 60%);
+  }
+  body::after{
+    content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+    background-image:linear-gradient(rgba(235,219,178,.03) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(235,219,178,.03) 1px,transparent 1px);
+    background-size:32px 32px;
+  }
+
+  /* ---- type ---- */
+  .eyebrow{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:0}
+  h1{font-family:var(--mono);font-weight:800;font-size:clamp(2.1rem,6.5vw,4.6rem);line-height:.98;letter-spacing:-.045em;margin:.6rem 0 0}
+  h1 em{font-style:normal;color:var(--gold)}
+  h2{font-family:var(--mono);font-weight:800;font-size:clamp(1.35rem,3.2vw,2.1rem);letter-spacing:-.03em;margin:0 0 .4rem}
+  h3{font-family:var(--mono);font-weight:500;font-size:.95rem;letter-spacing:.02em;margin:1.6rem 0 .5rem;color:var(--text)}
+  .lede{font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:200;color:var(--text);max-width:44rem;margin:1.4rem 0 0}
+  .sub{color:var(--dim);max-width:44rem;margin:.35rem 0 1.6rem;font-size:.98rem}
+  strong{font-weight:600;color:#fff}
+  code{font-family:var(--mono);font-size:.82em;background:var(--surface2);border:1px solid var(--border);padding:.1em .38em;border-radius:3px;color:var(--gold);word-break:break-word}
+  a{color:var(--blue)}
+  .n{font-family:var(--mono);font-weight:500;color:var(--gold)}
+
+  /* ---- layout ---- */
+  header{max-width:64rem;margin:0 auto;padding:4.5rem 1.5rem 2rem}
+  main{max-width:64rem;margin:0 auto;padding:0 1.5rem 6rem}
+  section{padding:3.2rem 0;border-top:1px solid var(--border)}
+  footer{max-width:64rem;margin:0 auto;padding:2rem 1.5rem 4rem;border-top:1px solid var(--border);color:var(--faint);font-family:var(--mono);font-size:.72rem}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(29,32,33,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  nav ul{display:flex;gap:.2rem;list-style:none;margin:0 auto;padding:.55rem 1.5rem;max-width:64rem;overflow-x:auto;scrollbar-width:none}
+  nav ul::-webkit-scrollbar{display:none}
+  nav a{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:.35rem .6rem;border-radius:3px;white-space:nowrap}
+  nav a:hover{color:var(--gold);background:var(--surface2)}
+
+  /* keyboard access */
+  nav a:focus-visible,summary:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:3px}
+
+  /* ---- stat strip ---- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:2.4rem 0 0}
+  .stat{background:var(--surface);padding:1rem 1.1rem}
+  .stat .v{font-family:var(--mono);font-weight:800;font-size:1.6rem;letter-spacing:-.03em;line-height:1;color:var(--gold)}
+  .stat .v.g{color:var(--green)} .stat .v.r{color:var(--red)} .stat .v.b{color:var(--blue)}
+  .stat .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-top:.4rem;line-height:1.4}
+
+  /* ---- flow ---- */
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:.5rem;margin:1.8rem 0}
+  .step{min-width:0;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:.85rem .9rem}
+  .step:nth-child(2){border-left-color:var(--blue)}
+  .step:nth-child(3){border-left-color:var(--pink)}
+  .step:nth-child(4){border-left-color:var(--green)}
+  .step:nth-child(5){border-left-color:var(--orange)}
+  .step:nth-child(6){border-left-color:var(--aqua)}
+  .step .t{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  .step .d{font-size:.9rem;margin-top:.3rem;color:var(--text)}
+
+  /* ---- tables ---- */
+  .wrap{overflow-x:auto;border:1px solid var(--border);background:var(--surface);margin:1.4rem 0}
+  table{width:100%;border-collapse:collapse;font-size:.87rem;min-width:34rem}
+  th{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--border);font-weight:500;background:var(--surface2);white-space:nowrap}
+  td{padding:.7rem .9rem;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:var(--surface2)}
+  td.mono,th.mono{font-family:var(--mono);font-size:.78rem;white-space:nowrap}
+
+  /* ---- badges ---- */
+  .b{font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .45rem;border-radius:2px;white-space:nowrap;display:inline-block}
+  .b.live{background:rgba(184,187,38,.16);color:var(--green);border:1px solid rgba(184,187,38,.35)}
+  .b.ready{background:rgba(254,128,25,.15);color:var(--orange);border:1px solid rgba(254,128,25,.35)}
+  .b.block{background:rgba(251,73,52,.15);color:var(--red);border:1px solid rgba(251,73,52,.35)}
+  .b.new{background:rgba(131,165,152,.15);color:var(--blue);border:1px solid rgba(131,165,152,.35)}
+  .b.off{background:var(--surface2);color:var(--faint);border:1px solid var(--border)}
+
+  /* ---- lanes ---- */
+  .lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:1.6rem 0}
+  .lane{background:var(--surface);border:1px solid var(--border);padding:1.1rem}
+  .lane.p{border-top:3px solid var(--blue)}
+  .lane.c{border-top:3px solid var(--pink)}
+  .lane.d{border-top:3px solid var(--green)}
+  .lane h3{margin:0 0 .2rem;font-size:1.05rem;font-weight:800}
+  .lane .q{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:.8rem}
+  .lane ul{margin:.5rem 0 0;padding-left:1.05rem}
+  .lane li{margin-bottom:.5rem;font-size:.88rem}
+  .lane li::marker{color:var(--gold)}
+
+  /* ---- callout ---- */
+  .call{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.1rem 1.2rem;margin:1.5rem 0}
+  .call.r{border-left-color:var(--red)}
+  .call .h{font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem}
+  .call.r .h{color:var(--red)}
+
+  /* ---- details ---- */
+  details{background:var(--surface);border:1px solid var(--border);margin:.6rem 0}
+  summary{cursor:pointer;padding:.7rem .9rem;font-family:var(--mono);font-size:.78rem;color:var(--blue);list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:'▸ ';color:var(--faint)}
+  details[open] summary::before{content:'▾ '}
+  details[open] summary{border-bottom:1px solid var(--border);color:var(--gold)}
+  .dbody{padding:.9rem;font-size:.87rem}
+  .dbody p:first-child{margin-top:0}
+  .dbody p:last-child{margin-bottom:0}
+
+  button.cp{font-family:var(--mono);font-size:.68rem;padding:.4rem .7rem;background:var(--surface2);color:var(--green);border:1px solid var(--border);border-radius:3px;cursor:pointer;margin-left:.4rem}
+  button.cp:hover{border-color:var(--green)}
+
+  /* ---- motion ---- */
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  header>*,main>section{animation:rise .55s ease-out both}
+  header>*:nth-child(1){animation-delay:.04s}
+  header>*:nth-child(2){animation-delay:.10s}
+  header>*:nth-child(3){animation-delay:.16s}
+  header>*:nth-child(4){animation-delay:.22s}
+  header>*:nth-child(5){animation-delay:.28s}
+  main>section{animation-delay:calc(.20s + var(--i,0)*.07s)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+
+  /* ---- print: Gruvbox Light remap (all colors flow through the variables) ---- */
+  @media print{
+    :root{
+      --bg:#fbf1c7; --surface:#f2e5bc; --surface2:#ebdbb2; --surface3:#d5c4a1;
+      --text:#3c3836; --dim:#665c54; --faint:#7c6f64; --border:#d5c4a1;
+      --gold:#b57614; --green:#79740e; --red:#9d0006; --blue:#076678; --orange:#af3a03; --pink:#8f3f71;
+      --aqua:#427b58; --gray:#928374;
+    }
+    body::before,body::after,nav,button.cp{display:none}
+    strong{color:#282828}
+    body{font-weight:400}
+    section,.wrap,details{break-inside:avoid}
+    header>*,main>section{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Internal briefing · {{date}} · {{project}}</p>
+  <h1>{{Verdict line, e.g. "We stopped guessing."}}<br>{{Second line with the}} <em>{{gold phrase}}</em>.</h1>
+  <p class="lede">{{One or two sentences: what exists, what it does for the business. Concrete nouns, no adjectives doing the work.}}</p>
+  <p class="sub">{{What this page covers, in one muted sentence.}}</p>
+  <div class="stats">
+    <div class="stat"><div class="v g">{{n}}</div><div class="k">{{good thing}}</div></div>
+    <div class="stat"><div class="v">{{n}}</div><div class="k">{{neutral metric}}</div></div>
+    <div class="stat"><div class="v b">{{n}}</div><div class="k">{{informational}}</div></div>
+    <div class="stat"><div class="v r">{{n}}</div><div class="k">{{the uncomfortable number}}</div></div>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#principle">Principle</a></li>
+    <li><a href="#coverage">Coverage</a></li>
+    <li><a href="#deepdive">{{Deep dive}}</a></li>
+    <li><a href="#action">{{Data to action}}</a></li>
+    <li><a href="#blocked">Blocked</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="principle" style="--i:0">
+  <p class="eyebrow">01 — {{The operating principle}}</p>
+  <h2>{{Claim, not label — e.g. "Every action traces back to a number"}}</h2>
+  <p class="sub">{{The rule this work is built to, and why the reader should trust the rest of the page.}}</p>
+
+  <div class="flow">
+    <div class="step"><div class="t">1 · {{Stage}}</div><div class="d">{{What happens, mechanically.}}</div></div>
+    <div class="step"><div class="t">2 · {{Stage}}</div><div class="d">{{…}}</div></div>
+    <div class="step"><div class="t">3 · {{Stage}}</div><div class="d">{{…}}</div></div>
+    <div class="step"><div class="t">4 · {{Stage}}</div><div class="d">{{…}}</div></div>
+  </div>
+
+  <div class="call">
+    <div class="h">{{Why a key design decision was made}}</div>
+    {{The reasoning, with the failure it prevents. One idea per callout.}}
+  </div>
+</section>
+
+<section id="coverage" style="--i:1">
+  <p class="eyebrow">02 — Coverage</p>
+  <h2>{{"What we actually have"}}</h2>
+  <p class="sub">Honest status per item. "Live" means it runs unattended. Nothing here is aspirational.</p>
+
+  <div class="wrap">
+  <table>
+    <thead><tr><th>{{Item}}</th><th>Answers the question</th><th class="mono">Status</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td><strong>{{Source A}}</strong></td><td>{{The manager-question it answers}}</td><td><span class="b live">live</span></td><td>{{cadence, cost}}</td></tr>
+      <tr><td><strong>{{Source B}}</strong></td><td>{{…}}</td><td><span class="b new">found, unused</span></td><td>{{see §03}}</td></tr>
+      <tr><td><strong>{{Source C}}</strong></td><td>{{…}}</td><td><span class="b block">blocked</span></td><td>{{one step left — see §05}}</td></tr>
+      <tr><td><strong>{{Source D}}</strong></td><td>{{…}}</td><td><span class="b off">not started</span></td><td>{{what it waits on}}</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <details>
+    <summary>{{The story behind the hardest row}}</summary>
+    <div class="dbody"><p>{{Depth for the skeptic: what was tried, what was verified, what surprised you.}}</p></div>
+  </details>
+</section>
+
+<section id="deepdive" style="--i:2">
+  <p class="eyebrow">03 — {{Deep dive}}</p>
+  <h2>{{This period's discovery, as a claim}}</h2>
+  <p class="sub">{{How it was verified, at what cost, and what it changes.}}</p>
+
+  <div class="call">
+    <div class="h">The find</div>
+    {{The single most valuable discovery, with its numbers in}} <span class="n">{{mono gold}}</span>.
+  </div>
+
+  <div class="stats" style="margin:1.5rem 0">
+    <div class="stat"><div class="v">{{n}}</div><div class="k">{{metric}}</div></div>
+    <div class="stat"><div class="v g">{{n}}</div><div class="k">{{improved}}</div></div>
+    <div class="stat"><div class="v r">{{n}}</div><div class="k">{{declined}}</div></div>
+  </div>
+
+  <details>
+    <summary>Technical detail — {{verified access, limits, evidence}}</summary>
+    <div class="dbody"><p>{{Endpoints, quotas, gotchas — the part only the technical reader opens.}}</p></div>
+  </details>
+</section>
+
+<section id="action" style="--i:3">
+  <p class="eyebrow">04 — {{Data to action}}</p>
+  <h2>{{How a number becomes a decision}}</h2>
+
+  <div class="lanes">
+    <div class="lane p">
+      <h3>{{Predict}}</h3>
+      <div class="q">{{what is about to matter}}</div>
+      <ul><li><strong>{{Capability.}}</strong> {{What it surfaces, from which measurement.}}</li></ul>
+    </div>
+    <div class="lane c">
+      <h3>{{Create}}</h3>
+      <div class="q">{{what to make, grounded}}</div>
+      <ul><li><strong>{{Capability.}}</strong> {{…}}</li></ul>
+    </div>
+    <div class="lane d">
+      <h3>{{Decide}}</h3>
+      <div class="q">{{where to spend effort}}</div>
+      <ul><li><strong>{{Capability.}}</strong> {{…}}</li></ul>
+    </div>
+  </div>
+
+  <div class="call">
+    <div class="h">The honest limit</div>
+    {{What this does NOT do. A human still decides X — this narrows the shortlist and attaches the reasoning.}}
+  </div>
+</section>
+
+<section id="blocked" style="--i:4">
+  <p class="eyebrow">05 — What's in the way</p>
+  <h2>{{N}} things, {{most of them not technical}}</h2>
+  <p class="sub">Ordered by what unlocks the most. Each needs a named person, not more engineering.</p>
+
+  <div class="wrap">
+  <table>
+    <thead><tr><th>Blocker</th><th>What it costs us</th><th>What's needed</th><th class="mono">Owner</th></tr></thead>
+    <tbody>
+      <tr><td><span class="b block">1</span> <strong>{{Blocker}}</strong></td><td>{{Concrete cost of not fixing}}</td><td>{{Smallest sufficient action}}</td><td class="mono">{{Role}}</td></tr>
+      <tr><td><span class="b block">2</span> <strong>{{Blocker}}</strong></td><td>{{…}}</td><td>{{…}}</td><td class="mono">{{Role}}</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="call r">
+    <div class="h">The one that takes two minutes</div>
+    {{The cheapest unlock, spelled out so the owner can act from this paragraph alone.}}
+    <div style="margin-top:.7rem;display:flex;align-items:center;flex-wrap:wrap;gap:.3rem">
+      <code id="cp1">{{value-to-copy, e.g. SERVICE_ACCOUNT@example.iam.gserviceaccount.com}}</code>
+      <button class="cp" onclick="navigator.clipboard.writeText(document.getElementById('cp1').textContent).then(()=>{this.textContent='✓ copied';setTimeout(()=>this.textContent='copy',1600)})">copy</button>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="--i:5">
+  <p class="eyebrow">06 — Questions</p>
+  <h2>Asked and answered</h2>
+
+  <details>
+    <summary>{{Are we paying for anything new here?}}</summary>
+    <div class="dbody"><p>{{Plain answer with numbers.}}</p></div>
+  </details>
+  <details>
+    <summary>{{The uncomfortable question}}</summary>
+    <div class="dbody"><p>{{Answered honestly — this is what earns trust for the rest of the page.}}</p></div>
+  </details>
+  <details>
+    <summary>What's the single next step?</summary>
+    <div class="dbody"><p>{{One cheap concrete action, and what it immediately unlocks.}}</p></div>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  {{Project}} · briefing generated {{date}} · figures verified against {{source}} on that date<br>
+  Companion documents — {{pointers to runbook / detail pages, if any}}
+</footer>
+
+<script>
+  // print: expand all collapsed detail so paper carries the full report
+  window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>d.open=true));
+</script>
+
+</body>
+</html>

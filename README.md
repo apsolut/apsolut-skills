@@ -23,6 +23,15 @@ Skills are grouped by category. Install the leaf skill folder, not the category 
 | [`design-dna`](design/design-dna/) | Extract a complete design system from a folder of 10–20 screenshots — colors, master font, spacing, components — and package it as a `<brand>-design` skill with Tailwind v4 tokens |
 | [`ghibli-design`](design/ghibli-design/) | Apply the Ghibli design system (cornflower blue + slate with teal/coral/gold accents) — drop-in Tailwind v4 + shadcn tokens, dark mode, component recipes |
 
+### reports — report & briefing templates
+
+Named `<style>-<purpose>-<audience>` so the `/command` says what you get. All share one anatomy and one anti-slop content judge; the style skin differs.
+
+| Skill | What it does |
+|-------|--------------|
+| [`gruvbox-brief-manager`](reports/gruvbox-brief-manager/) | Manager briefing in Gruvbox dark — terminal instrument panel: amber-led stat strips, honest status badges, numbered mono sections; complete HTML template + content judge |
+| [`ghibli-brief-manager`](reports/ghibli-brief-manager/) | The same briefing anatomy in Ghibli light — blue-tinted wash, white cards, teal/coral/gold semantics, Figtree + mono instrument labels |
+
 More categories land as skills do — planned: `coding/`, `images/`. Skills can also target a specific reference or project, e.g. `design/stripe-design/` for a design skill modeled on stripe.com — prefix the skill name with its subject so the `/command` stays self-explanatory.
 
 ## Install
