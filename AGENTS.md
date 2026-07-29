@@ -1,8 +1,8 @@
-# CLAUDE.md — apsolut-skills
+# AGENTS.md — apsolut-skills
 
-Public collection of self-collected, self-evolved Claude Code skills for code and design.
+Public collection of self-collected, self-evolved Codex skills for code and design.
 
-**Stack:** Markdown + optional shipped scripts (Claude Code skills: `SKILL.md` + `references/` + `scripts/`)
+**Stack:** Markdown + optional shipped scripts (Codex skills: `SKILL.md` + `references/` + `scripts/`)
 
 ## Vault (davinci profile — local only, gitignored)
 

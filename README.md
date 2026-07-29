@@ -14,8 +14,16 @@ Skills are grouped by category. Install the leaf skill folder, not the category 
 |-------|--------------|
 | [`apsolut-judge-init`](meta/apsolut-judge-init/) | Initialize an AI project workspace (Claude Project, custom GPT, Gem, repo instructions) judge-first, so it reproduces quality across sessions |
 | [`apsolut-judge-care`](meta/apsolut-judge-care/) | Maintain an existing project workspace: turn corrections into rules, prune rule rot, diagnose and fix output drift |
+| [`plan-board`](meta/plan-board/) | Render a plan as a single-file HTML review board — file map, diagrams, before/after code, one Open Questions block — approved before any code is written |
 
-More categories land as skills do — planned: `coding/`, `design/`, `images/`. Skills can also target a specific reference or project, e.g. `design/stripe-design/` for a design skill modeled on stripe.com — prefix the skill name with its subject so the `/command` stays self-explanatory.
+### design — design systems & visual language
+
+| Skill | What it does |
+|-------|--------------|
+| [`design-dna`](design/design-dna/) | Extract a complete design system from a folder of 10–20 screenshots — colors, master font, spacing, components — and package it as a `<brand>-design` skill with Tailwind v4 tokens |
+| [`ghibli-design`](design/ghibli-design/) | Apply the Ghibli design system (cornflower blue + slate with teal/coral/gold accents) — drop-in Tailwind v4 + shadcn tokens, dark mode, component recipes |
+
+More categories land as skills do — planned: `coding/`, `images/`. Skills can also target a specific reference or project, e.g. `design/stripe-design/` for a design skill modeled on stripe.com — prefix the skill name with its subject so the `/command` stays self-explanatory.
 
 ## Install
 
@@ -41,7 +49,8 @@ cp -r apsolut-skills/meta/apsolut-judge-init ~/.claude/skills/
 <category>/                  # meta, coding, design, images, ...
 └── <skill-name>/            # what you copy into your skills directory
     ├── SKILL.md             # frontmatter (name, description) + instructions
-    └── references/          # templates, manifests, supporting docs (optional)
+    ├── references/          # templates, manifests, supporting docs (optional)
+    └── scripts/             # runnable helpers the skill ships (optional; node/python/sh, dependency-light)
 ```
 
 Frontmatter stays on standard fields (`name`, `description`, `license`, `metadata`) so nothing breaks outside Claude Code.

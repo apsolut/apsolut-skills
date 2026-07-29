@@ -1,0 +1,150 @@
+<!doctype html>
+<!-- plan-board starter template. Copy, rename to NNN-<slug>.html, replace {{...}},
+     delete unused <section> blocks and these comments. Rules: reference.md §3. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{Plan title}}</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --text: #1c2333;
+    --text-2: #5a6478;
+    --border: #e3e7ee;
+    --accent: #3556b8;
+    --accent-soft: #e9eef9;
+    --good: #2e7d5b;
+    --warn: #b3661f;
+    --code-bg: #f1f3f7;
+    --add: #e5f3ec;
+    --del: #fbeaea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151c;
+      --surface: #1a1f2a;
+      --text: #e6e9f0;
+      --text-2: #9aa3b5;
+      --border: #2a3140;
+      --accent: #7d9be8;
+      --accent-soft: #232c42;
+      --good: #63b892;
+      --warn: #d99a55;
+      --code-bg: #161b25;
+      --add: #1c3129;
+      --del: #382224;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 ui-sans-serif, system-ui, sans-serif;
+  }
+  main { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.7rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.15rem; margin: 0 0 .75rem; }
+  section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem 1.5rem; margin-top: 1.25rem;
+  }
+  .kicker { color: var(--text-2); font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; }
+  .muted { color: var(--text-2); }
+  code, pre { font-family: ui-monospace, monospace; font-size: .875em; }
+  code { background: var(--code-bg); padding: .1em .35em; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: .9rem 1rem; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: .45rem .7rem; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-2); font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+  .tag { display: inline-block; font-size: .72rem; padding: .1em .5em; border-radius: 99px; border: 1px solid var(--border); color: var(--text-2); }
+  .tag.new { color: var(--good); border-color: var(--good); }
+  .tag.del { color: var(--warn); border-color: var(--warn); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 44rem) { .cols { grid-template-columns: 1fr; } }
+  .before { background: var(--del); } .after { background: var(--add); }
+  .q { border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; padding: .8rem 1rem; margin-top: .8rem; }
+  .q .default { color: var(--accent); font-weight: 600; }
+  ol li, ul li { margin: .3rem 0; }
+  /* wireframes: grayscale structure only (reference.md §3) */
+  .wf { border: 1.5px solid var(--text-2); border-radius: 6px; padding: .6rem; color: var(--text-2); }
+  .wf .box { border: 1px dashed var(--text-2); border-radius: 4px; padding: .4rem .6rem; margin: .35rem 0; background: color-mix(in srgb, var(--text) 6%, transparent); }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <div class="kicker">Plan · {{date}} · {{repo/branch}}</div>
+    <h1>{{Plan title}}</h1>
+    <p>{{One-paragraph outcome statement. What exists when this is done that doesn't exist now.}}</p>
+    <p><strong>Done means:</strong> {{observable criteria}}</p>
+  </header>
+
+  <!-- OPTIONAL: one concrete snapshot of the end state, near the top -->
+  <section>
+    <h2>Snapshot</h2>
+    <pre><code>{{sample payload / CLI transcript / mock region}}</code></pre>
+  </section>
+
+  <section>
+    <h2>Scope &amp; non-goals</h2>
+    <div class="cols">
+      <div><strong>In scope</strong><ul><li>{{…}}</li></ul></div>
+      <div><strong>Non-goals</strong><ul><li class="muted">{{…}}</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>File map</h2>
+    <div class="scroll"><table>
+      <tr><th>File</th><th>Change</th><th>Why</th></tr>
+      <tr><td><code>{{path/to/file.ts}}</code></td><td><span class="tag new">new</span></td><td>{{…}}</td></tr>
+      <tr><td><code>{{path/to/other.ts}}</code></td><td><span class="tag">edit</span></td><td>{{…}}</td></tr>
+    </table></div>
+  </section>
+
+  <!-- OPTIONAL: only when relationships are the point. Inline SVG or nested boxes. -->
+  <section>
+    <h2>Architecture</h2>
+    <div class="scroll">{{diagram}}</div>
+  </section>
+
+  <section>
+    <h2>Steps</h2>
+    <ol>
+      <li>{{Step naming real files, symbols, data shapes}}</li>
+    </ol>
+  </section>
+
+  <!-- OPTIONAL: the key change, ≤ 30 lines a side -->
+  <section>
+    <h2>Key change</h2>
+    <div class="cols">
+      <pre class="before"><code>{{before — real code from the repo}}</code></pre>
+      <pre class="after"><code>{{after}}</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>Risks &amp; verification</h2>
+    <ul>
+      <li><strong>Risk:</strong> {{…}} — <em>mitigation:</em> {{…}}</li>
+      <li><strong>Verify:</strong> {{end-to-end workflow, not just "tests pass"}}</li>
+    </ul>
+  </section>
+
+  <!-- Exactly one, always last. Each question: options + recommended default. -->
+  <section>
+    <h2>Open questions</h2>
+    <div class="q">
+      <strong>{{Question}}</strong>
+      <ul><li class="default">{{Option A — recommended default}}</li><li>{{Option B}}</li></ul>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
