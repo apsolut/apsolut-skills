@@ -9,6 +9,8 @@ Render an implementation plan — or any proposal: a design system, a migration,
 
 Concept ported from [BuilderIO/skills `visual-plan`](https://github.com/BuilderIO/skills/tree/main/skills/visual-plan) (MIT), rebuilt dependency-free — no hosted app, no MCP, no npm install. Just a template and a block vocabulary.
 
+> **Thank you, [Builder.io](https://github.com/BuilderIO)** 🙏 — plan-board exists because of your `visual-plan` skill. The idea that a plan deserves a visual surface you review and approve, instead of a wall of chat text, is yours; this skill just makes it portable.
+
 ## Use
 
 Trigger with **"visual plan"**, **"plan board"**, **"render the plan"**, **"make this plan reviewable"** — or whenever a plan is substantial enough that burying it in chat would waste it. The board lands in `.apsolut/03-plan/` when that vault exists, else `docs/plans/`, else the session scratchpad.
